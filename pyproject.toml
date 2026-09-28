@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rag-otel-demo"
+version = "0.1.0"
+description = "RAG Chatbot with OpenTelemetry instrumentation and Amazon Bedrock AgentCore Evaluations integration"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+
+dependencies = [
+    "boto3>=1.35.0",
+    "chromadb>=0.5.0",
+    "opentelemetry-api==1.25.0",
+    "opentelemetry-sdk==1.25.0",
+    "opentelemetry-exporter-otlp==1.25.0",
+    "opentelemetry-exporter-otlp-proto-http==1.25.0",
+    "rich>=13.7.0",
+    "prompt-toolkit>=3.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "ruff>=0.4.0",
+]
+jaeger = [
+    "opentelemetry-exporter-jaeger==1.21.0",
+]
+
+[project.scripts]
+rag-demo = "rag_demo.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
